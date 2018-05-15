@@ -1,0 +1,47 @@
+1)  	$sql = "SELECT oficinas.OFICINA, `CIUDAD`, `NUMEMP`, `NOMBRE`\n"
+
+    	. "FROM oficinas INNER JOIN empleados ON oficinas.OFICINA = empleados.OFICINA\n"
+
+    	. "WHERE REGION = \'ESTE\'";
+
+
+1.1) 	$sql = "SELECT oficinas.OFICINA, `CIUDAD`, `NUMEMP`, `NOMBRE`\n"
+
+    	. "FROM empleados RIGHT JOIN oficinas ON oficinas.OFICINA = empleados.OFICINA\n"
+
+    	. "WHERE REGION = \'ESTE\'";
+
+2) 	$sql = "SELECT `NUMPEDIDO`, `IMPORTE`, clientes.NOMBRE AS cliente, `LIMITECREDITO`\n"
+
+    	. "FROM pedidos INNER JOIN clientes ON pedidos.CLIE = clientes.NUMCLIE";
+
+
+3) 	$sql = "SELECT empleados.*, `CIUDAD`, `REGION`\n"
+
+    	. "FROM empleados LEFT JOIN oficinas ON empleados.OFICINA = oficinas.OFICINA";
+
+
+4)	$sql = "SELECT oficinas.*, `NOMBRE` AS `DIRECTOR`\n"
+
+    	. "FROM empleados RIGHT JOIN oficinas ON empleados.NUMEMP = oficinas.DIR\n"
+
+    	. "WHERE OBJETIVO > 600000";
+
+5)	$sql = "SELECT `NUMPEDIDO`, `IMPORTE`, empleados.NOMBRE AS REPRESENTANTE, clientes.NOMBRE AS CLIENTE\n"
+
+    	. "FROM (pedidos INNER JOIN clientes ON pedidos.CLIE = clientes.NUMCLIE) INNER JOIN empleados ON pedidos.REP = empleados.NUMEMP\n"
+	
+    	. "WHERE `IMPORTE` > 25000";
+
+
+6)	$sql = "SELECT empleados.* FROM empleados INNER JOIN pedidos ON pedidos.REP = empleados.NUMEMP WHERE `FECHAPEDIDO` = `CONTRATO`";
+
+
+7)	$sql = "SELECT empleados.*, jefes.NUMEMP AS num_jefe, jefes.NOMBRE AS nombre_jefe, jefes.CUOTA AS CUOTA_JEFE\n"
+
+    	. "FROM empleados INNER JOIN empleados jefes ON empleados.JEFE = jefes.NUMEMP\n"
+
+    	. "WHERE empleados.CUOTA > jefes.CUOTA";
+
+
+8)	$sql = "SELECT `NUMEMP` FROM empleados LEFT JOIN pedidos ON pedidos.REP = empleados.NUMEMP WHERE `IMPORTE` > 10000 OR `CUOTA` < 10000";

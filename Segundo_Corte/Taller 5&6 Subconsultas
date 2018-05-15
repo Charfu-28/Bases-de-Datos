@@ -1,0 +1,57 @@
+===============================================================================================
+SUBCONSULTAS TALLER 5:
+
+1). $sql  = 'SELECT `NOMBRE` FROM clientes WHERE `REPCLIE` = (SELECT `NUMEMP` FROM empleados WHERE `NOMBRE` = \'Alvaro Jaumes\' )';
+
+2). $sql  = 'SELECT `NUMEMP`, `NOMBRE`, `OFICINA` FROM empleados WHERE `OFICINA` IN ( SELECT`OFICINA` FROM oficinas WHERE `VENTAS` > `OBJETIVO`)';
+
+3). $sql  = 'SELECT `NUMEMP`,`NOMBRE`, `OFICINA` FROM empleados WHERE NOT EXISTS ( SELECT * FROM oficinas WHERE  empleados.OFICINA = oficinas.OFICINA AND DIR = 108)';
+
+4). $sql  = 'SELECT `IDFAB`, `IDPRODUCTO`, `DESCRIPCION` FROM productos WHERE NOT EXISTS (SELECT * FROM pedidos WHERE FAB = IDFAB AND PRODUCTO = `IDPRODUCTO` AND IMPORTE >= 25000)';
+
+5). $sql  = 'SELECT `NUMCLIE`, `NOMBRE` FROM clientes WHERE `REPCLIE` IN ( SELECT NUMEMP FROM empleados WHERE NOMBRE = \'Ana Bustamante\' ) AND `NUMCLIE` NOT IN ( SELECT CLIE FROM pedidos WHERE IMPORTE > 3000)';
+
+6). $sql  = 'SELECT * FROM oficinas WHERE EXISTS ( SELECT * FROM empleados WHERE empleados.OFICINA = oficinas.OFICINA AND `VENTAS` >`OBJETIVO`* 0.55)';
+
+7). $sql  = 'SELECT * FROM oficinas WHERE ((`OBJETIVO` * 0.5) <= ALL ( SELECT `VENTAS` FROM empleados WHERE empleados.OFICINA = oficinas.OFICINA AND `VENTAS` IS NOT NULL) )\n"
+
+    . "AND ( EXISTS ( SELECT * FROM empleados WHERE empleados.OFICINA = oficinas.OFICINA))';
+
+8). $sql  = 'SELECT * FROM oficinas WHERE `OBJETIVO` > ( SELECT SUM(CUOTA) FROM empleados WHERE empleados.OFICINA = oficinas.OFICINA)';
+
+
+===============================================================================================
+ACTUALIZACION TALLER 6:
+
+1). SELECT * INTO nuevaempleados FROM empleados;
+
+2). SELECT * INTO nuevaoficinas FROM oficinas;
+
+3). SELECT * INTO nuevaproductos FROM productos;
+
+4). SELECT * INTO nuevaproductos FROM productos;
+
+5). $sql  = 'UPDATE productos SET `PRECIO` = `PRECIO` * 0.05 WHERE `IDFAB` = \'ACI\'';
+
+6). $sql  = 'INSERT INTO oficinas ( `OFICINA`, `REGION`, `CIUDAD`,`OBJETIVO` ) VALUES ( 30, \'Centro\',\'Madrid\', 100000 )';
+
+7). $sql  = 'UPDATE empleados SET `OFICINA` = 30 WHERE `OFICINA` = 21';
+
+8). $sql  = 'DELETE FROM pedidos WHERE `REP` = 105';
+
+9). $sql  = 'DELETE FROM oficinas WHERE NOT EXISTS (SELECT * FROM empleados WHERE empleados.OFICINA = oficinas.OFICINA)';
+
+10). UPDATE productos INNER JOIN nuevaproductos ON ( productos.IDFAB = nuevaproductos.IDFAB) AND (productos.IDPRODUCTO = nuevaproductos.IDPRODUCTO)
+SET productos.PRECIO = nuevaproductos.PRECIO;
+
+11). INSERT INTO oficinas SELECT * FROM nuevaoficinas WHERE OFICINA NOT IN (SELECT OFICINA FROM oficinas);
+
+12). INSERT INTO pedidos SELECT * from nuevapedidos WHERE REP = 105;
+
+13).UPDATE empleados SET OFICINA = 21 WHERE oficina = 30;
+
+
+
+
+
+
